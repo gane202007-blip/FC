@@ -1,0 +1,36 @@
+[
+  { "id": 1, "name": "Gold Kundan Bangle Set", "category": "Bangles", "price": 1299, "rating": 4.8, "image": "https://images.unsplash.com/photo-1556228724-4ea92fa4b0d4?auto=format&fit=crop&w=600&q=80", "badge": "Bestseller" },
+  { "id": 2, "name": "Antique Meenakari Bangles", "category": "Bangles", "price": 1599, "rating": 4.7, "image": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80" },
+  { "id": 3, "name": "Pearl Embellished Bangles", "category": "Bangles", "price": 999, "rating": 4.5, "image": "https://images.unsplash.com/photo-1605100804763-247fe67ca167?auto=format&fit=crop&w=600&q=80" },
+  { "id": 4, "name": "Rose Gold Stack Bangles", "category": "Bangles", "price": 1199, "rating": 4.6, "image": "https://images.unsplash.com/photo-1617038261347-1c27abf81233?auto=format&fit=crop&w=600&q=80", "badge": "New" },
+
+  { "id": 5, "name": "Pearl Drop Earrings", "category": "Earrings", "price": 899, "rating": 4.6, "image": "https://images.unsplash.com/photo-1543163521-1bf539a28e7f?auto=format&fit=crop&w=600&q=80" },
+  { "id": 6, "name": "Crystal Chandelier Earrings", "category": "Earrings", "price": 749, "rating": 4.4, "image": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80" },
+  { "id": 7, "name": "Gold Hoop Earrings", "category": "Earrings", "price": 649, "rating": 4.8, "image": "https://images.unsplash.com/photo-1588444837495-c6cfeb339f13?auto=format&fit=crop&w=600&q=80", "badge": "Bestseller" },
+  { "id": 8, "name": "Floral Stud Earrings", "category": "Earrings", "price": 499, "rating": 4.3, "image": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80" },
+
+  { "id": 9, "name": "Rose Gold Necklace", "category": "Necklaces", "price": 2499, "rating": 4.9, "image": "https://images.unsplash.com/photo-1513185158878-797341a9bed1?auto=format&fit=crop&w=600&q=80", "badge": "New" },
+  { "id": 10, "name": "Kundan Choker Set", "category": "Necklaces", "price": 3299, "rating": 4.7, "image": "https://images.unsplash.com/photo-1599643478518-a784e3693801?auto=format&fit=crop&w=600&q=80" },
+  { "id": 11, "name": "Pearl Layered Necklace", "category": "Necklaces", "price": 1899, "rating": 4.6, "image": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80" },
+  { "id": 12, "name": "Minimal Gold Chain", "category": "Necklaces", "price": 999, "rating": 4.5, "image": "https://images.unsplash.com/photo-1611652022412-bdef40773706?auto=format&fit=crop&w=600&q=80" },
+
+  { "id": 13, "name": "Floral Hair Clip Set", "category": "Hair Accessories", "price": 349, "rating": 4.4, "image": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" },
+  { "id": 14, "name": "Pearl Hair Pin Collection", "category": "Hair Accessories", "price": 449, "rating": 4.5, "image": "https://images.unsplash.com/photo-1522338242992-e786576fd67f?auto=format&fit=crop&w=600&q=80" },
+  { "id": 15, "name": "Bridal Hair Comb", "category": "Hair Accessories", "price": 799, "rating": 4.8, "image": "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=600&q=80", "badge": "Bestseller" },
+  { "id": 16, "name": "Satin Scrunchie Pack", "category": "Hair Accessories", "price": 299, "rating": 4.2, "image": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80" },
+
+  { "id": 17, "name": "Mini Crossbody Bag", "category": "Handbags", "price": 1899, "rating": 4.7, "image": "https://images.unsplash.com/photo-1495121605193-b116b5b9c5f1?auto=format&fit=crop&w=600&q=80" },
+  { "id": 18, "name": "Embroidered Clutch", "category": "Handbags", "price": 1299, "rating": 4.6, "image": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80" },
+  { "id": 19, "name": "Pink Tote Handbag", "category": "Handbags", "price": 2199, "rating": 4.8, "image": "https://images.unsplash.com/photo-1591561954557-26941169b49e?auto=format&fit=crop&w=600&q=80", "badge": "New" },
+  { "id": 20, "name": "Evening Party Purse", "category": "Handbags", "price": 1599, "rating": 4.5, "image": "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=600&q=80" },
+
+  { "id": 21, "name": "Luxury Lipstick Kit", "category": "Cosmetics", "price": 599, "rating": 4.5, "image": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" },
+  { "id": 22, "name": "Rose Blush Palette", "category": "Cosmetics", "price": 849, "rating": 4.4, "image": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80" },
+  { "id": 23, "name": "Glow Highlighter Set", "category": "Cosmetics", "price": 699, "rating": 4.7, "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=600&q=80" },
+  { "id": 24, "name": "Perfume Gift Box", "category": "Cosmetics", "price": 1499, "rating": 4.9, "image": "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=600&q=80", "badge": "Bestseller" },
+
+  { "id": 25, "name": "Luxury Gift Hamper", "category": "Gift Items", "price": 1599, "rating": 4.8, "image": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=600&q=80" },
+  { "id": 26, "name": "Scented Candle Set", "category": "Gift Items", "price": 699, "rating": 4.5, "image": "https://images.unsplash.com/photo-1602874805490-064b300b5a57?auto=format&fit=crop&w=600&q=80" },
+  { "id": 27, "name": "Personalized Jewelry Box", "category": "Gift Items", "price": 999, "rating": 4.6, "image": "https://images.unsplash.com/photo-1606760227091-3dd870d9e998?auto=format&fit=crop&w=600&q=80", "badge": "New" },
+  { "id": 28, "name": "Festive Gift Basket", "category": "Gift Items", "price": 1299, "rating": 4.7, "image": "https://images.unsplash.com/photo-1549465220-1a0b923878483?auto=format&fit=crop&w=600&q=80" }
+]

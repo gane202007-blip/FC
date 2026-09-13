@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout | Ladies Fancy Store</title>
+
+    <link rel="stylesheet" href="checkout.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header class="checkout-header">
+
+        <div class="logo">
+            <a href="../index.html">Ladies Fancy Store</a>
+        </div>
+
+        <div class="checkout-title">
+            Checkout
+        </div>
+
+    </header>
+
+
+
+    <!-- Progress -->
+
+    <section class="progress-section">
+
+        <div class="step active">
+            <span>1</span>
+            <p>Address</p>
+        </div>
+
+        <div class="line active"></div>
+
+        <div class="step">
+            <span>2</span>
+            <p>Payment</p>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="step">
+            <span>3</span>
+            <p>Success</p>
+        </div>
+
+    </section>
+
+
+
+    <main class="checkout-container">
+
+        <!-- Left -->
+
+        <section class="left-section">
+
+            <!-- Address -->
+
+            <div class="checkout-card">
+
+                <div class="card-header">
+
+                    <h2>
+                        Delivery Address
+                    </h2>
+
+                    <button class="add-address-btn">
+                        + Add New
+                    </button>
+
+                </div>
+
+                <div class="address-card">
+
+                    <input type="radio" checked>
+
+                    <div>
+
+                        <h3>Ganesh Doddi</h3>
+
+                        <p>
+                            45 Main Road,
+                            Hyderabad,
+                            Telangana,
+                            500001
+                        </p>
+
+                        <p>Mobile : +91 9876543210</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Products -->
+
+            <div class="checkout-card">
+
+                <h2>Your Items</h2>
+
+                <div class="product-item">
+
+                    <img src="../images/products/product1.jpg" alt="">
+
+                    <div class="product-details">
+
+                        <h3>Designer Hand Bag</h3>
+
+                        <p>Qty : 1</p>
+
+                        <h4>₹799</h4>
+
+                    </div>
+
+                </div>
+
+                <div class="product-item">
+
+                    <img src="../images/products/product2.jpg" alt="">
+
+                    <div class="product-details">
+
+                        <h3>Gold Earrings</h3>
+
+                        <p>Qty : 2</p>
+
+                        <h4>₹1,198</h4>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+
+
+        <!-- Right -->
+
+        <aside class="right-section">
+
+            <!-- Coupon -->
+
+            <div class="checkout-card">
+
+                <h2>Coupon</h2>
+
+                <div class="coupon-box">
+
+                    <input
+                        type="text"
+                        placeholder="Enter Coupon Code">
+
+                    <button>
+                        Apply
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Price Details -->
+
+            <div class="checkout-card">
+
+                <h2>Price Details</h2>
+
+                <div class="price-row">
+                    <span>Subtotal</span>
+                    <span>₹1,997</span>
+                </div>
+
+                <div class="price-row">
+                    <span>Shipping</span>
+                    <span>FREE</span>
+                </div>
+
+                <div class="price-row">
+                    <span>Discount</span>
+                    <span>-₹200</span>
+                </div>
+
+                <hr>
+
+                <div class="price-row total">
+
+                    <span>Total</span>
+
+                    <span>₹1,797</span>
+
+                </div>
+
+                <button class="payment-btn">
+                    Continue to Payment
+                </button>
+
+            </div>
+
+        </aside>
+
+    </main>
+
+
+
+    <script src="checkout.js"></script>
+
+</body>
+
+</html>

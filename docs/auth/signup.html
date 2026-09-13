@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Ladies Fancy Store</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Authentication CSS -->
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+
+<body>
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <!-- Logo -->
+        <div class="logo">
+            <img src="../images/logo.png" alt="Store Logo">
+            <h2>Create Account</h2>
+            <p>Join Ladies Fancy Store Today</p>
+        </div>
+
+        <!-- Signup Form -->
+        <form id="signupForm">
+
+            <!-- Full Name -->
+            <div class="input-group">
+                <i class="fa-solid fa-user"></i>
+                <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Full Name"
+                    required>
+            </div>
+
+            <!-- Mobile -->
+            <div class="input-group">
+                <i class="fa-solid fa-phone"></i>
+                <input
+                    type="tel"
+                    id="mobile"
+                    placeholder="Mobile Number"
+                    maxlength="10"
+                    required>
+            </div>
+
+            <!-- Email -->
+            <div class="input-group">
+                <i class="fa-solid fa-envelope"></i>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Email Address"
+                    required>
+            </div>
+
+            <!-- Password -->
+            <div class="input-group password-group">
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Create Password"
+                    required>
+
+                <span class="toggle-password">
+                    <i class="fa-solid fa-eye"></i>
+                </span>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="input-group password-group">
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm Password"
+                    required>
+
+                <span class="toggle-password">
+                    <i class="fa-solid fa-eye"></i>
+                </span>
+            </div>
+
+            <!-- Terms -->
+            <div class="options">
+
+                <label>
+
+                    <input type="checkbox" id="terms" required>
+
+                    I agree to the Terms & Conditions
+
+                </label>
+
+            </div>
+
+            <!-- Signup Button -->
+            <button type="submit" class="btn">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+        <!-- Divider -->
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+        <!-- Login Link -->
+        <p class="bottom-text">
+
+            Already have an account?
+
+            <a href="login.html">
+
+                Login
+
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<script src="../js/auth.js"></script>
+
+<script>
+const form = document.getElementById("signupForm");
+
+if (form) {
+
+    form.addEventListener("submit", function(e) {
+
+        e.preventDefault();
+
+        const name = document.getElementById("fullName").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const mobile = document.getElementById("mobile").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return;
+        }
+
+
+        const result = registerUser(name, mobile, email, password);
+
+        alert(result.message);
+
+        if(result.success){
+            window.location.href="login.html";
+        }
+
+    });
+
+}
+</script>
+
+</body>
+</html>

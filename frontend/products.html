@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products | Ladies Fancy Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="page-loader" id="pageLoader"><div class="spinner"></div></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="images/logo.png" alt="Ladies Fancy Store" class="brand-logo" />
+        <span>
+          <span class="brand-name">Ladies Fancy</span>
+          <span class="brand-subtitle">Elegance Redefined</span>
+        </span>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false">☰ Menu</button>
+      <nav class="nav-bar" id="mainNav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <a href="cart.html" class="icon-btn" aria-label="Shopping cart">
+          🛒
+          <span class="cart-badge hidden" id="cartBadge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="products-page">
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Our Collection</p>
+        <h1>Shop All Products</h1>
+        <p>Discover bangles, earrings, handbags & more — curated for every occasion.</p>
+      </div>
+    </section>
+
+    <div class="container products-layout">
+      <button class="sidebar-toggle btn btn-secondary" type="button">☰ Categories</button>
+
+      <aside class="category-sidebar" id="categorySidebar">
+        <h2>Categories</h2>
+        <ul class="category-list" id="categoryList"></ul>
+      </aside>
+
+      <section class="products-main">
+        <div class="products-toolbar">
+          <div class="search-box products-search">
+            <span class="search-icon">🔍</span>
+            <input type="search" id="productSearch" placeholder="Search products..." autocomplete="off" />
+          </div>
+          <p class="results-count" id="resultsCount">Showing 0 products</p>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+
+        <div class="empty-state hidden" id="emptyState">
+          <p>No products found. Try a different search or category.</p>
+        </div>
+
+        <nav class="pagination" id="pagination" aria-label="Product pagination"></nav>
+      </section>
+    </div>
+  </main>
+
+  <div class="modal-overlay hidden" id="quickViewModal" role="dialog" aria-modal="true" aria-label="Quick view">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close">&times;</button>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Ladies Fancy Store. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/products.js"></script>
+</body>
+</html>

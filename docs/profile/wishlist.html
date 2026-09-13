@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist | Ladies Fancy Store</title>
+
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="profile-container">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="profile-user">
+            <img src="https://i.pravatar.cc/150?img=47">
+            <h3>Ganesh</h3>
+            <p>ganesh@email.com</p>
+        </div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="profile.html">
+                    <i class="fas fa-user"></i>
+                    My Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="orders.html">
+                    <i class="fas fa-box"></i>
+                    Orders
+                </a>
+            </li>
+
+            <li>
+                <a href="addresses.html">
+                    <i class="fas fa-location-dot"></i>
+                    Addresses
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="wishlist.html">
+                    <i class="fas fa-heart"></i>
+                    Wishlist
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fas fa-right-from-bracket"></i>
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Content -->
+
+    <main class="content">
+
+        <div class="page-header">
+
+            <h2>My Wishlist</h2>
+
+        </div>
+
+        <div class="wishlist-grid">
+
+            <!-- Product 1 -->
+
+            <div class="wishlist-card">
+
+                <img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=500"
+                    alt="Earrings">
+
+                <div class="wishlist-info">
+
+                    <h3>Premium Pearl Earrings</h3>
+
+                    <div class="rating">
+
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+
+                        <span>(4.8)</span>
+
+                    </div>
+
+                    <p class="price">
+                        ₹499
+                        <span>₹799</span>
+                    </p>
+
+                    <p class="stock in-stock">
+                        <i class="fas fa-circle-check"></i>
+                        In Stock
+                    </p>
+
+                    <div class="wishlist-actions">
+
+                        <button class="cart-btn">
+                            <i class="fas fa-cart-shopping"></i>
+                            Move to Cart
+                        </button>
+
+                        <button class="remove-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Product 2 -->
+
+            <div class="wishlist-card">
+
+                <img src="https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=500"
+                    alt="Handbag">
+
+                <div class="wishlist-info">
+
+                    <h3>Women's Handbag</h3>
+
+                    <div class="rating">
+
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+
+                        <span>(4.2)</span>
+
+                    </div>
+
+                    <p class="price">
+                        ₹1,299
+                        <span>₹1,799</span>
+                    </p>
+
+                    <p class="stock in-stock">
+                        <i class="fas fa-circle-check"></i>
+                        In Stock
+                    </p>
+
+                    <div class="wishlist-actions">
+
+                        <button class="cart-btn">
+                            <i class="fas fa-cart-shopping"></i>
+                            Move to Cart
+                        </button>
+
+                        <button class="remove-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Product 3 -->
+
+            <div class="wishlist-card">
+
+                <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=500"
+                    alt="Watch">
+
+                <div class="wishlist-info">
+
+                    <h3>Luxury Women's Watch</h3>
+
+                    <div class="rating">
+
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+
+                        <span>(5.0)</span>
+
+                    </div>
+
+                    <p class="price">
+                        ₹2,499
+                        <span>₹3,499</span>
+                    </p>
+
+                    <p class="stock out-stock">
+                        <i class="fas fa-circle-xmark"></i>
+                        Out of Stock
+                    </p>
+
+                    <div class="wishlist-actions">
+
+                        <button class="cart-btn" disabled>
+                            Out of Stock
+                        </button>
+
+                        <button class="remove-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="profile.js"></script>
+
+</body>
+
+</html>

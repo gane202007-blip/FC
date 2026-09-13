@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Ladies Fancy Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="page-loader" id="pageLoader"><div class="spinner"></div></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="images/logo.png" alt="Ladies Fancy Store" class="brand-logo" />
+        <span>
+          <span class="brand-name">Ladies Fancy</span>
+          <span class="brand-subtitle">Elegance Redefined</span>
+        </span>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false">☰ Menu</button>
+      <nav class="nav-bar" id="mainNav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <a href="cart.html" class="icon-btn" aria-label="Shopping cart">
+          🛒
+          <span class="cart-badge hidden" id="cartBadge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Get in Touch</p>
+        <h1>Contact Us</h1>
+        <p>We'd love to hear from you. Visit our store or reach out anytime.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="contact-grid">
+          <article class="contact-card">
+            <h3>📍 Store Address</h3>
+            <p style="color: var(--muted); line-height: 1.7;">123 Fashion Street,<br />Main Market, City – 500001</p>
+          </article>
+          <article class="contact-card">
+            <h3>📞 Phone</h3>
+            <a href="tel:+919876543210">+91 98765 43210</a>
+          </article>
+          <article class="contact-card">
+            <h3>✉️ Email</h3>
+            <a href="mailto:hello@ladiesfancy.com">hello@ladiesfancy.com</a>
+          </article>
+          <article class="contact-card whatsapp-card">
+            <h3>💬 WhatsApp</h3>
+            <a href="https://wa.me/919876543210">Chat with us instantly</a>
+          </article>
+        </div>
+
+        <div class="about-grid" style="margin-top: 2rem;">
+          <form class="contact-form" id="contactForm">
+            <h2 style="font-family: 'Playfair Display', serif; margin-top: 0;">Send a Message</h2>
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" required placeholder="Enter your name" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required placeholder="you@email.com" />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required placeholder="How can we help you?"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Send Message</button>
+          </form>
+          <div class="map-frame">
+            <iframe
+              title="Store location"
+              src="https://maps.google.com/maps?q=hyderabad&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Ladies Fancy Store. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      showToast('Thank you! We will get back to you soon.');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
