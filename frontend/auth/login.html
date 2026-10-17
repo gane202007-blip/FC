@@ -11,7 +11,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <!-- Authentication CSS -->
-    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="auth.css">
 </head>
 
 <body>
@@ -24,7 +24,7 @@
 
         <div class="logo">
 
-            <img src="../images/logo.png" alt="Logo">
+            <img src="../../images/logo.png" alt="Logo">
 
             <h2>Ladies Fancy Store</h2>
 
@@ -126,29 +126,43 @@
 
     <!-- Other HTML content -->
 
-    <script src="../js/auth.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="auth.js"></script>
 
     <script>
     const form = document.getElementById("loginForm");
 
     if (form) {
 
-        form.addEventListener("submit", function(e) {
-
+        form.addEventListener("submit", async function(e) {
             e.preventDefault();
 
             const email = document.getElementById("loginEmail").value.trim();
             const password = document.getElementById("loginPassword").value;
             const remember = document.getElementById("rememberMe").checked;
 
-            const result = loginUser(email, password, remember);
+            const result = await window.API.request("/auth/login", {
+                method: "POST",
+                body: { email, password }
+            });
 
-            alert(result.message);
-
-            if (result.success) {
-                window.location.href = "../profile/profile.html";
+            if (!result.success || !result.token || !result.user) {
+                alert(result.message || "Login failed. Please try again.");
+                return;
             }
 
+            window.API.setToken(result.token);
+            window.API.setUser(result.user);
+
+            if (remember) {
+                localStorage.setItem("rememberEmail", email);
+            } else {
+                localStorage.removeItem("rememberEmail");
+            }
+
+            window.location.href = result.user.role === "admin"
+                ? "../admin/products.html"
+                : "../profile/profile.html";
         });
 
     }

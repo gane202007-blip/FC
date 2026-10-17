@@ -1,8 +1,4 @@
-/* ==========================
-   Google Font
-========================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
 /* ==========================
    Variables
@@ -10,23 +6,23 @@
 
 :root{
 
-    --primary:#e91e63;
-    --primary-dark:#c2185b;
-    --secondary:#ff80ab;
+    --primary:#d88b8f;
+    --primary-dark:#c77b86;
+    --gold:#c69b69;
 
     --success:#16a34a;
     --warning:#f59e0b;
 
-    --text:#222;
-    --light-text:#666;
+    --text:#3f2b25;
+    --light-text:#7e6761;
 
     --white:#fff;
 
-    --background:#fff5f8;
+    --background:#fff8f2;
 
-    --border:#f1d9e3;
+    --border:rgba(155,126,97,.18);
 
-    --shadow:0 10px 30px rgba(0,0,0,.08);
+    --shadow:0 20px 50px rgba(78,49,35,.08);
 
     --radius:20px;
 
@@ -41,14 +37,17 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+    font-family:'Inter',sans-serif;
 
 }
 
 body{
 
-    background:var(--background);
+    background:
+        radial-gradient(circle at top left,rgba(255,232,232,.8),transparent 25%),
+        linear-gradient(180deg,#fff8f2 0%,#fffefb 100%);
     color:var(--text);
+    min-height:100vh;
 
 }
 
@@ -58,7 +57,7 @@ body{
 
 .checkout-header{
 
-    background:#fff;
+    background:rgba(255,248,243,.92);
 
     display:flex;
 
@@ -66,9 +65,12 @@ body{
 
     align-items:center;
 
+    gap:12px;
+
     padding:18px 8%;
 
-    box-shadow:0 4px 15px rgba(0,0,0,.05);
+    border-bottom:1px solid rgba(198,155,105,.16);
+    box-shadow:0 8px 24px rgba(78,49,35,.05);
 
     position:sticky;
 
@@ -82,15 +84,17 @@ body{
 
     text-decoration:none;
 
-    color:var(--primary);
-
-    font-size:26px;
+    color:var(--text);
+    font-family:'Playfair Display',serif;
+    font-size:22px;
 
     font-weight:700;
 
 }
 
 .checkout-title{
+
+    color:var(--text);
 
     font-size:28px;
 
@@ -104,7 +108,7 @@ body{
 
 .progress-section{
 
-    width:85%;
+    width:min(640px,calc(100% - 2rem));
 
     margin:35px auto;
 
@@ -134,7 +138,7 @@ body{
 
     border-radius:50%;
 
-    border:2px solid #ddd;
+    border:2px solid var(--border);
 
     display:flex;
 
@@ -172,7 +176,7 @@ body{
 
 .step.active p{
 
-    color:var(--primary);
+    color:var(--primary-dark);
 
     font-weight:600;
 
@@ -184,7 +188,7 @@ body{
 
     height:4px;
 
-    background:#ddd;
+    background:var(--border);
 
     margin:0 10px;
 
@@ -204,18 +208,22 @@ body{
 
 .checkout-container{
 
-    width:90%;
+    width:min(1100px,calc(100% - 2rem));
 
     margin:auto;
 
     display:grid;
 
-    grid-template-columns:2fr 1fr;
-
-    gap:30px;
+    grid-template-columns:minmax(0,2fr) minmax(280px,1fr);
+    gap:24px;
 
     padding-bottom:60px;
 
+}
+
+.left-section,
+.right-section{
+    min-width:0;
 }
 
 /* ==========================
@@ -224,7 +232,8 @@ body{
 
 .checkout-card{
 
-    background:#fff;
+    background:var(--white);
+    border:1px solid var(--border);
 
     border-radius:var(--radius);
 
@@ -245,6 +254,9 @@ body{
 }
 
 .checkout-card h2{
+
+    color:var(--text);
+    font-family:'Playfair Display',serif;
 
     font-size:22px;
 
@@ -308,7 +320,7 @@ body{
 
     padding:20px;
 
-    border:2px solid var(--border);
+    border:1px solid var(--border);
 
     border-radius:18px;
 
@@ -352,7 +364,7 @@ body{
 
     padding:18px 0;
 
-    border-bottom:1px solid #eee;
+    border-bottom:1px solid var(--border);
 
 }
 
@@ -417,6 +429,7 @@ body{
 .coupon-box input{
 
     flex:1;
+    min-width:0;
 
     border:2px solid var(--border);
 
@@ -431,6 +444,7 @@ body{
 .coupon-box input:focus{
 
     border-color:var(--primary);
+    box-shadow:0 0 0 3px rgba(216,139,143,.16);
 
 }
 
@@ -516,8 +530,42 @@ body{
 
     transform:translateY(-3px);
 
-    box-shadow:0 12px 30px rgba(233,30,99,.3);
+    box-shadow:0 12px 30px rgba(216,139,143,.28);
 
+}
+
+.payment-btn:disabled{
+    opacity:.65;
+    cursor:not-allowed;
+    transform:none;
+    box-shadow:none;
+}
+
+.checkout-message{
+    margin-top:14px;
+    color:var(--light-text);
+}
+
+.checkout-message.error{
+    color:#a13c45;
+}
+
+.checkout-message.success{
+    color:var(--primary-dark);
+}
+
+#checkoutSuccess{
+    margin-top:16px;
+    padding:16px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:var(--background);
+    line-height:1.6;
+}
+
+#checkoutSuccess a{
+    color:var(--primary-dark);
+    font-weight:600;
 }
 
 /* ==========================
@@ -549,8 +597,7 @@ body{
     }
 
     .progress-section{
-
-        width:95%;
+        width:calc(100% - 2rem);
 
     }
 
@@ -576,19 +623,31 @@ body{
 
 @media(max-width:550px){
 
+    .checkout-header{
+        padding:16px;
+    }
+
+    .checkout-title{
+        font-size:20px;
+    }
+
+    .checkout-card{
+        padding:20px;
+    }
+
     .product-item{
 
-        flex-direction:column;
-
-        text-align:center;
+        align-items:flex-start;
+        gap:14px;
 
     }
 
     .product-item img{
 
-        width:140px;
+        width:80px;
 
-        height:140px;
+        height:80px;
+        flex-shrink:0;
 
     }
 

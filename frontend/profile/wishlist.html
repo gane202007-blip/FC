@@ -21,8 +21,8 @@
 
         <div class="profile-user">
             <img src="https://i.pravatar.cc/150?img=47">
-            <h3>Ganesh</h3>
-            <p>ganesh@email.com</p>
+            <h3 id="wishlistUserName">My Account</h3>
+            <p id="wishlistUserEmail"></p>
         </div>
 
         <ul class="menu">
@@ -76,164 +76,19 @@
 
         </div>
 
-        <div class="wishlist-grid">
-
-            <!-- Product 1 -->
-
-            <div class="wishlist-card">
-
-                <img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=500"
-                    alt="Earrings">
-
-                <div class="wishlist-info">
-
-                    <h3>Premium Pearl Earrings</h3>
-
-                    <div class="rating">
-
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-
-                        <span>(4.8)</span>
-
-                    </div>
-
-                    <p class="price">
-                        ₹499
-                        <span>₹799</span>
-                    </p>
-
-                    <p class="stock in-stock">
-                        <i class="fas fa-circle-check"></i>
-                        In Stock
-                    </p>
-
-                    <div class="wishlist-actions">
-
-                        <button class="cart-btn">
-                            <i class="fas fa-cart-shopping"></i>
-                            Move to Cart
-                        </button>
-
-                        <button class="remove-btn">
-                            <i class="fas fa-trash"></i>
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- Product 2 -->
-
-            <div class="wishlist-card">
-
-                <img src="https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=500"
-                    alt="Handbag">
-
-                <div class="wishlist-info">
-
-                    <h3>Women's Handbag</h3>
-
-                    <div class="rating">
-
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-
-                        <span>(4.2)</span>
-
-                    </div>
-
-                    <p class="price">
-                        ₹1,299
-                        <span>₹1,799</span>
-                    </p>
-
-                    <p class="stock in-stock">
-                        <i class="fas fa-circle-check"></i>
-                        In Stock
-                    </p>
-
-                    <div class="wishlist-actions">
-
-                        <button class="cart-btn">
-                            <i class="fas fa-cart-shopping"></i>
-                            Move to Cart
-                        </button>
-
-                        <button class="remove-btn">
-                            <i class="fas fa-trash"></i>
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- Product 3 -->
-
-            <div class="wishlist-card">
-
-                <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=500"
-                    alt="Watch">
-
-                <div class="wishlist-info">
-
-                    <h3>Luxury Women's Watch</h3>
-
-                    <div class="rating">
-
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-
-                        <span>(5.0)</span>
-
-                    </div>
-
-                    <p class="price">
-                        ₹2,499
-                        <span>₹3,499</span>
-                    </p>
-
-                    <p class="stock out-stock">
-                        <i class="fas fa-circle-xmark"></i>
-                        Out of Stock
-                    </p>
-
-                    <div class="wishlist-actions">
-
-                        <button class="cart-btn" disabled>
-                            Out of Stock
-                        </button>
-
-                        <button class="remove-btn">
-                            <i class="fas fa-trash"></i>
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
+        <p id="wishlistStatus" class="address-message" role="status" aria-live="polite">Loading wishlist...</p>
+        <div class="wishlist-grid" id="wishlistGrid" aria-busy="true"></div>
+        <p id="wishlistEmpty" class="address-empty hidden">Your wishlist is empty. Browse products to add your favourites.</p>
 
     </main>
 
 </div>
 
-<script src="profile.js"></script>
+
+<script src="../js/api.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/wishlist-api.js"></script>
+<script src="wishlist.js"></script>
 
 </body>
 

@@ -3,14 +3,22 @@
 const mongoose = require("mongoose");
 
 const connectDB = async () => {
-    try {
-        const conn = await mongoose.connect(process.env.MONGO_URI);
+    const uri = process.env.MONGO_URI ||
+        (process.env.NODE_ENV === "production"
+            ? ""
+            : "mongodb://127.0.0.1:27017/ladies-fancy-store");
+    if (!uri) {
+        throw new Error("MONGO_URI is required in production");
+    }
 
-        console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
-    } catch (error) {
-        console.error("❌ MongoDB Connection Failed");
-        console.error(error.message);
-        process.exit(1);
+    try {
+        const conn = await mongoose.connect(uri);
+
+        console.log("✅ MongoDB connection established");
+        return conn.connection;
+    } catch {
+        console.error("❌ MongoDB connection failed");
+        throw new Error("MongoDB connection failed");
     }
 };
 

@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -15,7 +16,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand">
-        <img src="images/logo.png" alt="Ladies Fancy Store" class="brand-logo" />
+        <img src="../images/logo.png" alt="Ladies Fancy Store" class="brand-logo" />
         <span>
           <span class="brand-name">Ladies Fancy</span>
           <span class="brand-subtitle">Elegance Redefined</span>
@@ -33,6 +34,12 @@
           🛒
           <span class="cart-badge hidden" id="cartBadge">0</span>
         </a>
+        <div class="account-menu">
+          <button class="account-btn" type="button">
+            👤 <span id="accountText">My Account</span> ▾
+          </button>
+          <div class="account-dropdown" id="accountDropdown"></div>
+        </div>
       </div>
     </div>
   </header>
@@ -47,10 +54,9 @@
     </section>
 
     <div class="container products-layout">
-      <button class="sidebar-toggle btn btn-secondary" type="button">☰ Categories</button>
+      <button class="sidebar-toggle btn btn-secondary" type="button" aria-expanded="false" aria-controls="categorySidebar">☰ Categories</button>
 
       <aside class="category-sidebar" id="categorySidebar">
-        <h2>Categories</h2>
         <ul class="category-list" id="categoryList"></ul>
       </aside>
 
@@ -87,6 +93,8 @@
     </div>
   </footer>
 
+  <script src="js/api.js"></script>
+  <script src="js/wishlist-api.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/main.js"></script>
   <script src="js/products.js"></script>

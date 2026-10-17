@@ -74,32 +74,13 @@
                         Delivery Address
                     </h2>
 
-                    <button class="add-address-btn">
+                    <button class="add-address-btn" id="addCheckoutAddressBtn" type="button">
                         + Add New
                     </button>
 
                 </div>
 
-                <div class="address-card">
-
-                    <input type="radio" checked>
-
-                    <div>
-
-                        <h3>Ganesh Doddi</h3>
-
-                        <p>
-                            45 Main Road,
-                            Hyderabad,
-                            Telangana,
-                            500001
-                        </p>
-
-                        <p>Mobile : +91 9876543210</p>
-
-                    </div>
-
-                </div>
+                <div id="checkoutAddresses" aria-busy="true"></div>
 
             </div>
 
@@ -111,37 +92,7 @@
 
                 <h2>Your Items</h2>
 
-                <div class="product-item">
-
-                    <img src="../images/products/product1.jpg" alt="">
-
-                    <div class="product-details">
-
-                        <h3>Designer Hand Bag</h3>
-
-                        <p>Qty : 1</p>
-
-                        <h4>₹799</h4>
-
-                    </div>
-
-                </div>
-
-                <div class="product-item">
-
-                    <img src="../images/products/product2.jpg" alt="">
-
-                    <div class="product-details">
-
-                        <h3>Gold Earrings</h3>
-
-                        <p>Qty : 2</p>
-
-                        <h4>₹1,198</h4>
-
-                    </div>
-
-                </div>
+                <div id="checkoutItems" aria-busy="true"></div>
 
             </div>
 
@@ -167,7 +118,7 @@
                         type="text"
                         placeholder="Enter Coupon Code">
 
-                    <button>
+                    <button id="applyCouponBtn" type="button">
                         Apply
                     </button>
 
@@ -185,7 +136,7 @@
 
                 <div class="price-row">
                     <span>Subtotal</span>
-                    <span>₹1,997</span>
+                    <span id="checkoutSubtotal">₹0</span>
                 </div>
 
                 <div class="price-row">
@@ -195,7 +146,7 @@
 
                 <div class="price-row">
                     <span>Discount</span>
-                    <span>-₹200</span>
+                    <span id="checkoutDiscount">-₹0</span>
                 </div>
 
                 <hr>
@@ -204,13 +155,18 @@
 
                     <span>Total</span>
 
-                    <span>₹1,797</span>
+                    <span id="checkoutTotal">₹0</span>
 
                 </div>
 
-                <button class="payment-btn">
-                    Continue to Payment
+                <button class="payment-btn" id="placeOrderBtn" type="button" disabled>
+                    Place Order (Cash on Delivery)
                 </button>
+                <p id="checkoutMessage" class="checkout-message" role="status" aria-live="polite"></p>
+                <div id="checkoutSuccess" hidden>
+                    <p>Order placed successfully. Your order ID is <strong id="successOrderId"></strong>.</p>
+                    <a href="../profile/orders.html">View your orders</a>
+                </div>
 
             </div>
 
@@ -218,10 +174,9 @@
 
     </main>
 
-
-
+    <script src="../js/api.js"></script>
+    <script src="../js/wishlist-api.js"></script>
     <script src="checkout.js"></script>
-
 </body>
 
 </html>

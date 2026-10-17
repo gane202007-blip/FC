@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -15,7 +16,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand">
-        <img src="images/logo.png" alt="Ladies Fancy Store" class="brand-logo" />
+        <img src="../images/logo.png" alt="Ladies Fancy Store" class="brand-logo" />
         <span>
           <span class="brand-name">Ladies Fancy</span>
           <span class="brand-subtitle">Elegance Redefined</span>
@@ -33,6 +34,12 @@
           🛒
           <span class="cart-badge hidden" id="cartBadge">0</span>
         </a>
+        <div class="account-menu">
+          <button class="account-btn" type="button">
+            👤 <span id="accountText">My Account</span> ▾
+          </button>
+          <div class="account-dropdown" id="accountDropdown"></div>
+        </div>
       </div>
     </div>
   </header>
@@ -48,8 +55,9 @@
 
     <div class="container cart-layout">
       <section>
-        <div id="cartItems"></div>
-        <div class="empty-state" id="cartEmpty">
+        <p id="cartStatus" role="status" aria-live="polite" hidden></p>
+        <div id="cartItems" aria-busy="true"></div>
+        <div class="empty-state hidden" id="cartEmpty">
           <p>Your cart is empty.</p>
           <a href="products.html" class="btn btn-primary" style="margin-top: 1rem;">Continue Shopping</a>
         </div>
@@ -63,13 +71,16 @@
         </div>
         <div class="summary-row">
           <span>Shipping</span>
-          <span>Free</span>
+          <span style="color:#16a34a; font-weight:600;">FREE</span>
         </div>
         <div class="summary-row total">
           <span>Total</span>
           <span id="grandTotal">₹0</span>
         </div>
-        <a href="https://wa.me/919876543210" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Checkout via WhatsApp</a>
+        <a href="checkout/checkout.html" class="btn btn-primary" style="width: 100%; margin-top: 1rem; text-align: center;">Proceed to Checkout</a>
+        <a href="#" id="whatsappCheckoutBtn" class="btn btn-outline" style="width: 100%; margin-top: 0.75rem; text-align: center;">
+          <i class="fa-brands fa-whatsapp" style="color:#25D366; margin-right:6px;"></i> Order via WhatsApp
+        </a>
         <button class="btn btn-outline" id="clearCartBtn" type="button" style="width: 100%; margin-top: 0.75rem;">Clear Cart</button>
       </aside>
     </div>
@@ -81,6 +92,8 @@
     </div>
   </footer>
 
+  <script src="js/api.js"></script>
+  <script src="js/wishlist-api.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/main.js"></script>
 </body>

@@ -1,19 +1,15 @@
+/* ===========================================
+   Ladies Fancy Store — Products Listing & Filter
+   =========================================== */
+
 const ITEMS_PER_PAGE = 8;
-const CATEGORIES = [
-  'All Products',
-  'Bangles',
-  'Earrings',
-  'Necklaces',
-  'Hair Accessories',
-  'Handbags',
-  'Cosmetics',
-  'Gift Items',
-];
+let CATEGORIES = ['All Products'];
 
 let allProducts = [];
 let currentCategory = 'All Products';
 let currentSearch = '';
 let currentPage = 1;
+let userWishlistIds = new Set();
 
 const grid = document.getElementById('productGrid');
 const pagination = document.getElementById('pagination');
@@ -26,12 +22,8 @@ const modalBody = document.getElementById('modalBody');
 document.addEventListener('DOMContentLoaded', async () => {
   if (!grid) return;
 
-  try {
-    const response = await fetch('data/products.json');
-    allProducts = await response.json();
-  } catch {
-    allProducts = [];
-  }
+  await loadProducts();
+  await loadWishlistStatus();
 
   initCategoryFromUrl();
   renderCategorySidebar();
@@ -39,11 +31,55 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderProducts();
 });
 
+async function loadProducts() {
+  try {
+    const res = await window.API.request('/products');
+    allProducts = res.success && Array.isArray(res.products) ? res.products : [];
+  } catch (err) {
+    console.error('Failed to load products:', err);
+    allProducts = [];
+  }
+  updateCategories();
+}
+
+function normalizeCategory(category) {
+  return typeof category === 'string' ? category.trim().toLowerCase() : '';
+}
+
+function updateCategories() {
+  const categories = new Map();
+  allProducts.forEach((product) => {
+    const category = typeof product.category === 'string' ? product.category.trim() : '';
+    const key = normalizeCategory(category);
+    if (key && !categories.has(key)) {
+      categories.set(key, category);
+    }
+  });
+  CATEGORIES = ['All Products', ...categories.values()];
+}
+
+async function loadWishlistStatus() {
+  userWishlistIds.clear();
+  if (!localStorage.getItem('authToken')) return;
+
+  try {
+    const res = await window.WishlistAPI.request('/wishlist');
+    if (Array.isArray(res.wishlist)) {
+      res.wishlist.forEach((item) => userWishlistIds.add(Number(item.productId)));
+    }
+  } catch (error) {
+    console.error('Wishlist load error:', error);
+  }
+}
+
 function initCategoryFromUrl() {
   const params = new URLSearchParams(window.location.search);
   const category = params.get('category');
-  if (category && CATEGORIES.includes(category)) {
-    currentCategory = category;
+  if (category) {
+    const matchingCategory = CATEGORIES.find(
+      (item) => normalizeCategory(item) === normalizeCategory(category)
+    );
+    if (matchingCategory) currentCategory = matchingCategory;
   }
 }
 
@@ -51,14 +87,15 @@ function renderCategorySidebar() {
   const list = document.getElementById('categoryList');
   if (!list) return;
 
+  const escape = window.API.escapeHtml;
   list.innerHTML = CATEGORIES.map(
     (cat) => `
       <li>
         <button
           class="category-btn${cat === currentCategory ? ' active' : ''}"
-          data-category="${cat}"
+          data-category="${escape(cat)}"
           type="button"
-        >${cat}</button>
+        >${escape(cat)}</button>
       </li>
     `
   ).join('');
@@ -73,8 +110,10 @@ function renderStars(rating) {
 function getFilteredProducts() {
   return allProducts.filter((product) => {
     const matchCategory =
-      currentCategory === 'All Products' || product.category === currentCategory;
-    const matchSearch = product.name.toLowerCase().includes(currentSearch.toLowerCase());
+      currentCategory === 'All Products' ||
+      normalizeCategory(product.category) === normalizeCategory(currentCategory);
+    const matchSearch = product.name.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                        product.category.toLowerCase().includes(currentSearch.toLowerCase());
     return matchCategory && matchSearch;
   });
 }
@@ -88,28 +127,36 @@ function renderProducts() {
   const pageItems = filtered.slice(start, start + ITEMS_PER_PAGE);
 
   grid.innerHTML = pageItems
-    .map(
-      (product) => `
+    .map((product) => {
+      const isWishlisted = userWishlistIds.has(product.id);
+      const outOfStock = Number(product.stock) < 1;
+      const escape = window.API.escapeHtml;
+      return `
         <article class="product-card" data-id="${product.id}">
           <div class="product-image-wrap">
-            ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
-            <img src="${product.image}" alt="${product.name}" loading="lazy" />
+            ${product.badge ? `<span class="product-badge">${escape(product.badge)}</span>` : ''}
+            <button class="card-wishlist-btn${isWishlisted ? ' active' : ''}" type="button" aria-label="Toggle Wishlist" aria-pressed="${isWishlisted}" data-id="${product.id}">
+              <i class="fa-${isWishlisted ? 'solid' : 'regular'} fa-heart"></i>
+            </button>
+            <a href="product-details.html?id=${product.id}">
+              <img src="${escape(window.API.safeProductImage(product.image))}" alt="${escape(product.name)}" loading="lazy" />
+            </a>
             <div class="product-overlay">
               <button class="btn btn-outline quick-view" type="button">Quick View</button>
             </div>
           </div>
           <div class="product-info">
-            <p class="product-category">${product.category}</p>
-            <h3 class="product-name">${product.name}</h3>
+            <p class="product-category">${escape(product.category)}</p>
+            <h3 class="product-name"><a href="product-details.html?id=${product.id}">${escape(product.name)}</a></h3>
             <p class="product-price">${formatPrice(product.price)}</p>
             <p class="product-rating">${renderStars(product.rating)}</p>
             <div class="product-actions">
-              <button class="btn btn-primary add-to-cart" type="button">Add to Cart</button>
+              <button class="btn btn-primary add-to-cart" type="button" data-id="${product.id}"${outOfStock ? ' disabled' : ''}>${outOfStock ? 'Out of Stock' : 'Add to Cart'}</button>
             </div>
           </div>
         </article>
-      `
-    )
+      `;
+    })
     .join('');
 
   emptyState?.classList.toggle('hidden', pageItems.length > 0);
@@ -143,17 +190,71 @@ function renderPagination(totalPages) {
 function openQuickView(product) {
   if (!modal || !modalBody) return;
 
+  const outOfStock = Number(product.stock) < 1;
+  const escape = window.API.escapeHtml;
+
   modalBody.innerHTML = `
-    <img src="${product.image}" alt="${product.name}" />
-    <p class="product-category">${product.category}</p>
-    <h2>${product.name}</h2>
+    <img src="${escape(window.API.safeProductImage(product.image))}" alt="${escape(product.name)}" />
+    <p class="product-category">${escape(product.category)}</p>
+    <h2>${escape(product.name)}</h2>
     <p class="product-price">${formatPrice(product.price)}</p>
     <p class="product-rating">${renderStars(product.rating)}</p>
-    <p class="modal-desc">Premium quality ${product.category.toLowerCase()} — perfect for parties, weddings, and everyday elegance.</p>
-    <button class="btn btn-primary add-to-cart" data-id="${product.id}" type="button">Add to Cart</button>
+    <p class="modal-desc">${escape(product.description || `Premium handcrafted ${product.category.toLowerCase()} designed for timeless beauty.`)}</p>
+    <div style="display:flex; gap:10px; margin-top:15px; flex-wrap:wrap;">
+      <button class="btn btn-primary add-to-cart" data-id="${product.id}" type="button" style="flex:1;"${outOfStock ? ' disabled' : ''}>${outOfStock ? 'Out of Stock' : 'Add to Cart'}</button>
+      <a href="product-details.html?id=${product.id}" class="btn btn-secondary" style="flex:1; text-align:center;">Full Details</a>
+    </div>
   `;
 
   modal.classList.remove('hidden');
+}
+
+async function toggleWishlist(productId, btnElement) {
+  const pId = Number(productId);
+  const product = allProducts.find((p) => p.id === pId);
+  if (!product || btnElement?.disabled) return;
+
+  const isCurrentlyIn = userWishlistIds.has(pId);
+  if (btnElement) btnElement.disabled = true;
+
+  try {
+    if (isCurrentlyIn) {
+      await window.WishlistAPI.request(`/wishlist/${pId}`, { method: 'DELETE' });
+      userWishlistIds.delete(pId);
+      showToast('Removed from Wishlist');
+    } else {
+      await window.WishlistAPI.request('/wishlist', {
+        method: 'POST',
+        body: {
+          productId: pId,
+          product: {
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            category: product.category,
+            rating: product.rating
+          }
+        }
+      });
+      userWishlistIds.add(pId);
+      showToast('Added to Wishlist');
+    }
+
+    document.querySelectorAll(`.card-wishlist-btn[data-id="${pId}"]`).forEach((button) => {
+      const isWishlisted = userWishlistIds.has(pId);
+      button.classList.toggle('active', isWishlisted);
+      button.setAttribute('aria-pressed', String(isWishlisted));
+      const icon = button.querySelector('i');
+      if (icon) {
+        icon.className = `fa-${isWishlisted ? 'solid' : 'regular'} fa-heart`;
+      }
+    });
+  } catch (error) {
+    console.error('Wishlist update error:', error);
+    showToast(error.message || 'Unable to update your wishlist.');
+  } finally {
+    if (btnElement) btnElement.disabled = false;
+  }
 }
 
 function bindEvents() {
@@ -187,35 +288,65 @@ function bindEvents() {
     document.querySelector('.products-main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  document.querySelector('.sidebar-toggle')?.addEventListener('click', () => {
-    document.getElementById('categorySidebar')?.classList.toggle('open');
+  document.querySelector('.sidebar-toggle')?.addEventListener('click', (event) => {
+    const sidebar = document.getElementById('categorySidebar');
+    const isOpen = sidebar?.classList.toggle('open') || false;
+    document.querySelector('.products-layout')?.classList.toggle('categories-open', isOpen);
+    event.currentTarget.setAttribute('aria-expanded', String(isOpen));
   });
 
   grid?.addEventListener('click', (event) => {
     const card = event.target.closest('.product-card');
     if (!card) return;
 
-    const product = allProducts.find((p) => p.id === Number(card.dataset.id));
+    const id = Number(card.dataset.id);
+    const product = allProducts.find((p) => p.id === id);
     if (!product) return;
 
-    if (event.target.closest('.quick-view')) {
-      openQuickView(product);
+    // Wishlist button click
+    const wishlistBtn = event.target.closest('.card-wishlist-btn');
+    if (wishlistBtn) {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleWishlist(id, wishlistBtn);
+      return;
     }
 
-    if (event.target.closest('.add-to-cart')) {
-      addToCart(product);
-      showToast(`${product.name} added to cart!`);
+    if (event.target.closest('.quick-view')) {
+      event.preventDefault();
+      openQuickView(product);
+      return;
+    }
+
+    const addButton = event.target.closest('.add-to-cart');
+    if (addButton) {
+      event.preventDefault();
+      if (typeof addToCart === 'function') {
+        addButton.disabled = true;
+        addToCart(product)
+          .then(() => showToast(`${product.name} added to cart!`))
+          .catch((error) => showToast(error.message || 'Unable to add this product to your cart.'))
+          .finally(() => {
+            addButton.disabled = false;
+          });
+      }
     }
   });
 
   modalBody?.addEventListener('click', (event) => {
-    if (!event.target.closest('.add-to-cart')) return;
+    const addButton = event.target.closest('.add-to-cart');
+    if (!addButton || addButton.disabled) return;
 
     const id = Number(event.target.dataset.id);
     const product = allProducts.find((p) => p.id === id);
-    if (product) {
-      addToCart(product);
-      showToast(`${product.name} added to cart!`);
+    if (product && typeof addToCart === 'function') {
+      addButton.disabled = true;
+      addToCart(product)
+        .then(() => showToast(`${product.name} added to cart!`))
+        .catch((error) => showToast(error.message || 'Unable to add this product to your cart.'))
+        .finally(() => {
+          addButton.disabled = false;
+        });
     }
   });
 

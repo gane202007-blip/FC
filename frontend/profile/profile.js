@@ -3,13 +3,11 @@
 // ===============================
 
 // Get Logged In User
-let currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
+// ===============================
+// Profile Module
+// ===============================
 
-// Redirect if not logged in
-if (!currentUser) {
-    alert("Please login first.");
-    window.location.href = "../auth/login.html";
-}
+let currentUser = null;
 
 // ===============================
 // Elements
@@ -38,22 +36,62 @@ const editPhone = document.getElementById("editPhone");
 // Load User
 // ===============================
 
-function loadProfile() {
+async function loadProfile() {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+        localStorage.removeItem("loggedInUser");
+        window.location.href = "../auth/login.html";
+        return;
+    }
 
-    userName.textContent = currentUser.name || "User";
+    try {
+        const response = await window.API.request("/auth/me", {
+            auth: true,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
 
-    fullName.textContent = currentUser.name || "-";
+        if (response.unauthorized) {
+            return;
+        }
 
-    email.textContent = currentUser.email || "-";
+        if (!response.success) {
+            throw new Error(response.message);
+        }
 
-    phone.textContent = currentUser.phone || "Not Added";
+        currentUser = response.user;
 
-    avatar.src =
-        `https://ui-avatars.com/api/?name=${encodeURIComponent(currentUser.name || "User")}&background=f06292&color=fff&size=200`;
+        localStorage.setItem(
+            "loggedInUser",
+            JSON.stringify(currentUser)
+        );
 
+        userName.textContent = currentUser.name || "User";
+        fullName.textContent = currentUser.name || "-";
+        email.textContent = currentUser.email || "-";
+        phone.textContent = currentUser.phone || "Not Added";
+
+        avatar.src =
+            `https://ui-avatars.com/api/?name=${encodeURIComponent(currentUser.name || "User")}&background=d88b8f&color=fff&size=200`;
+
+    } catch (error) {
+        console.error("Failed to load profile:", error);
+        alert("Unable to load your profile. Please try again.");
+    }
 }
 
 loadProfile();
+
+logoutBtn.addEventListener("click", () => {
+    if (!window.confirm("Are you sure you want to log out?")) {
+        return;
+    }
+
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "../auth/login.html";
+});
 
 // ===============================
 // Open Modal
@@ -90,67 +128,48 @@ window.addEventListener("click", (e) => {
     }
 
 });
-
 // ===============================
 // Save Profile
 // ===============================
 
-profileForm.addEventListener("submit", function (e) {
+profileForm.addEventListener("submit", async function (e) {
 
     e.preventDefault();
 
-    currentUser.name = editName.value.trim();
+    try {
+        const response = await window.API.request("/users/profile", {
+            method: "PUT",
+            auth: true,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: {
+                name: editName.value.trim(),
+                phone: editPhone.value.trim()
+            }
+        });
 
-    currentUser.email = editEmail.value.trim();
-
-    currentUser.phone = editPhone.value.trim();
-
-    localStorage.setItem(
-        "loggedInUser",
-        JSON.stringify(currentUser)
-    );
-
-    // Update users array
-
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-
-    users = users.map(user => {
-
-        if (user.email === currentUser.email) {
-
-            return currentUser;
-
+        if (!response.success) {
+            alert(response.message || "Profile update failed.");
+            return;
         }
 
-        return user;
+        currentUser = response.user;
 
-    });
+        localStorage.setItem(
+            "loggedInUser",
+            JSON.stringify(currentUser)
+        );
 
-    localStorage.setItem(
-        "users",
-        JSON.stringify(users)
-    );
+        loadProfile();
 
-    loadProfile();
+        modal.classList.remove("show");
 
-    modal.classList.remove("show");
+        alert("Profile updated successfully!");
 
-    alert("Profile updated successfully!");
-
-});
-
-// ===============================
-// Logout
-// ===============================
-
-logoutBtn.addEventListener("click", () => {
-
-    if (confirm("Are you sure you want to logout?")) {
-
-        localStorage.removeItem("loggedInUser");
-
-        window.location.href = "../auth/login.html";
-
+    } catch (error) {
+        console.error("Profile update error:", error);
+        alert("Unable to update profile. Please try again.");
     }
-
 });

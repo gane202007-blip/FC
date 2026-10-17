@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Details | Ladies Fancy Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="page-loader" id="pageLoader"><div class="spinner"></div></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="../images/logo.png" alt="Ladies Fancy Store" class="brand-logo" />
+        <span>
+          <span class="brand-name">Ladies Fancy</span>
+          <span class="brand-subtitle">Elegance Redefined</span>
+        </span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false">
+        ☰ Menu
+      </button>
+
+      <nav class="nav-bar" id="mainNav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="cart.html" class="icon-btn" aria-label="Shopping Cart">
+          🛒
+          <span class="cart-badge hidden" id="cartBadge">0</span>
+        </a>
+
+        <div class="account-menu">
+          <button class="account-btn" type="button">
+            👤 <span id="accountText">My Account</span> ▾
+          </button>
+          <div class="account-dropdown" id="accountDropdown"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label="Breadcrumbs">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <a href="products.html">Products</a>
+      <span>/</span>
+      <span id="breadcrumbCategory">Category</span>
+      <span>/</span>
+      <span id="breadcrumbTitle">Product Name</span>
+    </nav>
+
+    <!-- Product Details Content -->
+    <div class="product-detail-layout" id="productDetailContainer">
+      <!-- Left: Gallery / Image -->
+      <div class="detail-gallery">
+        <div class="detail-img-box">
+          <img id="detailImage" src="" alt="Product Image" />
+        </div>
+      </div>
+
+      <!-- Right: Product Info & Actions -->
+      <div class="detail-info">
+        <span class="detail-category-badge" id="detailCategory">Category</span>
+        <h1 class="detail-title" id="detailName">Product Name</h1>
+
+        <div class="detail-meta">
+          <div id="detailRating"></div>
+          <span class="detail-stock-badge"><i class="fa-solid fa-circle-check"></i> In Stock</span>
+        </div>
+
+        <div class="detail-price-box">
+          <span class="detail-price" id="detailPrice">₹0</span>
+          <span class="detail-tax-note">Inclusive of all taxes</span>
+        </div>
+
+        <p class="detail-description" id="detailDesc">
+          Loading product description...
+        </p>
+
+        <!-- Quantity & Add to Cart -->
+        <div class="detail-purchase-row">
+          <div class="qty-picker">
+            <button type="button" id="qtyMinus" aria-label="Decrease quantity">−</button>
+            <span id="qtyVal">1</span>
+            <button type="button" id="qtyPlus" aria-label="Increase quantity">+</button>
+          </div>
+
+          <button class="btn btn-primary detail-btn-cart" id="detailAddToCartBtn" type="button">
+            <i class="fa-solid fa-bag-shopping" style="margin-right:8px;"></i> Add to Cart
+          </button>
+
+          <button class="detail-btn-wishlist" id="detailWishlistBtn" type="button" aria-label="Add to Wishlist">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+
+        <!-- Store Quality & Delivery Perks -->
+        <div class="detail-perks">
+          <div class="perk-item">
+            <i class="fa-solid fa-truck-fast"></i>
+            <span>Fast Dispatch within 24 Hours</span>
+          </div>
+          <div class="perk-item">
+            <i class="fa-solid fa-gem"></i>
+            <span>100% Quality Inspected</span>
+          </div>
+          <div class="perk-item">
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+            <span>7 Days Easy Return Policy</span>
+          </div>
+          <div class="perk-item">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Secure Cash on Delivery / UPI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    <section class="related-section">
+      <h2>You May Also Love</h2>
+      <div class="product-grid" id="relatedProductsGrid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Ladies Fancy Store. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/wishlist-api.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/product-detail.js"></script>
+</body>
+</html>

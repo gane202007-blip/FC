@@ -54,7 +54,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="#" id="logoutBtn">
                         <i class="fas fa-right-from-bracket"></i>
                         Logout
                     </a>
@@ -72,132 +72,77 @@
 
                 <h2>Saved Addresses</h2>
 
-                <button class="add-address-btn">
+                <button class="add-address-btn" id="addAddressBtn" type="button">
                     <i class="fas fa-plus"></i>
                     Add New Address
                 </button>
 
             </div>
 
-            <!-- Address 1 -->
-
-            <div class="address-card">
-
-                <div class="address-top">
-
-                    <h3>Home</h3>
-
-                    <span class="default-badge">
-                        Default
-                    </span>
-
-                </div>
-
-                <p><strong>Ganesh</strong></p>
-
-                <p>+91 9876543210</p>
-
-                <p>
-                    Door No. 12-45,
-                    Main Road,
-                    Vijayawada,
-                    Andhra Pradesh - 520001
-                </p>
-
-                <div class="address-actions">
-
-                    <button class="edit-btn">
-                        <i class="fas fa-pen"></i>
-                        Edit
-                    </button>
-
-                    <button class="delete-btn">
-                        <i class="fas fa-trash"></i>
-                        Delete
-                    </button>
-
-                </div>
-
-            </div>
-
-            <!-- Address 2 -->
-
-            <div class="address-card">
-
-                <div class="address-top">
-
-                    <h3>Office</h3>
-
-                </div>
-
-                <p><strong>Ganesh</strong></p>
-
-                <p>+91 9876543210</p>
-
-                <p>
-                    5th Floor,
-                    Business Park,
-                    Hyderabad,
-                    Telangana - 500081
-                </p>
-
-                <div class="address-actions">
-
-                    <button class="edit-btn">
-                        <i class="fas fa-pen"></i>
-                        Edit
-                    </button>
-
-                    <button class="delete-btn">
-                        <i class="fas fa-trash"></i>
-                        Delete
-                    </button>
-
-                </div>
-
-            </div>
-
-            <!-- Address 3 -->
-
-            <div class="address-card">
-
-                <div class="address-top">
-
-                    <h3>Parents Home</h3>
-
-                </div>
-
-                <p><strong>Ganesh</strong></p>
-
-                <p>+91 9876543210</p>
-
-                <p>
-                    Near Temple Road,
-                    Guntur,
-                    Andhra Pradesh - 522001
-                </p>
-
-                <div class="address-actions">
-
-                    <button class="edit-btn">
-                        <i class="fas fa-pen"></i>
-                        Edit
-                    </button>
-
-                    <button class="delete-btn">
-                        <i class="fas fa-trash"></i>
-                        Delete
-                    </button>
-
-                </div>
-
-            </div>
+            <p id="addressMessage" class="address-message" role="status" aria-live="polite"></p>
+            <div id="addressesContainer"></div>
 
         </main>
 
     </div>
 
-    <script src="profile.js"></script>
+    <div class="modal" id="addressModal" aria-hidden="true">
+        <div class="modal-content address-modal-content" role="dialog" aria-modal="true"
+            aria-labelledby="addressModalTitle">
+            <button class="close-btn" id="closeAddressModal" type="button"
+                aria-label="Close address form">&times;</button>
+            <h2 id="addressModalTitle">Add New Address</h2>
+
+            <form class="address-form" id="addressForm">
+                <div class="form-group">
+                    <label for="addressFullName">Full Name</label>
+                    <input id="addressFullName" name="fullName" type="text" autocomplete="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="addressPhone">Phone</label>
+                    <input id="addressPhone" name="phone" type="tel" autocomplete="tel" required>
+                </div>
+                <div class="form-group">
+                    <label for="addressStreet">Street Address</label>
+                    <textarea id="addressStreet" name="street" rows="3" autocomplete="street-address" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="addressCity">City</label>
+                    <input id="addressCity" name="city" type="text" autocomplete="address-level2" required>
+                </div>
+                <div class="form-group">
+                    <label for="addressState">State</label>
+                    <input id="addressState" name="state" type="text" autocomplete="address-level1" required>
+                </div>
+                <div class="form-group">
+                    <label for="addressPincode">Pincode</label>
+                    <input id="addressPincode" name="pincode" type="text" inputmode="numeric"
+                        autocomplete="postal-code" required>
+                </div>
+                <div class="form-group">
+                    <label for="addressType">Address Type</label>
+                    <select id="addressType" name="type">
+                        <option value="Home">Home</option>
+                        <option value="Office">Office</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group address-default-option">
+                    <label>
+                        <input name="isDefault" type="checkbox">
+                        Set as default address
+                    </label>
+                </div>
+                <div class="address-form-actions">
+                    <button class="save-btn" type="submit">Save Address</button>
+                    <button class="edit-btn" id="cancelAddressForm" type="button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/api.js" defer></script>
+    <script src="addresses.js" defer></script>
 
 </body>
 

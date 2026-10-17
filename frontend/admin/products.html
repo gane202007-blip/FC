@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#fff8f2" />
+  <title>Product Management | Ladies Fancy Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body class="admin-page">
+  <main class="admin-shell">
+    <header class="admin-header">
+      <a class="admin-brand" href="../index.html">
+        <img src="../../images/logo.png" alt="" />
+        <span><strong>Ladies Fancy</strong><small>Product management</small></span>
+      </a>
+      <div class="admin-header-actions">
+        <span id="adminName" class="admin-name"></span>
+        <a class="btn btn-secondary" href="../products.html">View storefront</a>
+        <button class="btn btn-quiet" id="logoutButton" type="button">Log out</button>
+      </div>
+    </header>
+
+    <section id="accessMessage" class="admin-notice" role="status" aria-live="polite">Verifying administrator access…</section>
+    <div id="dashboard" class="hidden">
+      <section class="admin-intro">
+        <div>
+          <p class="eyebrow">Inventory</p>
+          <h1>Products</h1>
+          <p>Manage the products displayed in your storefront.</p>
+        </div>
+        <button id="addProductButton" class="btn btn-primary" type="button">
+          <span aria-hidden="true">＋</span> Add product
+        </button>
+      </section>
+
+      <section class="summary-grid" aria-label="Inventory summary">
+        <article class="summary-card"><span>Total products</span><strong id="totalProducts">—</strong></article>
+        <article class="summary-card"><span>Low stock <small>(10 or fewer)</small></span><strong id="lowStock">—</strong></article>
+        <article class="summary-card"><span>Out of stock</span><strong id="outOfStock">—</strong></article>
+        <article class="summary-card"><span>Categories</span><strong id="categoryCount">—</strong></article>
+      </section>
+
+      <section class="inventory-panel">
+        <div class="inventory-toolbar">
+          <div>
+            <h2>Product inventory</h2>
+            <p id="inventoryCount">Loading products…</p>
+          </div>
+          <label class="admin-search">
+            <span class="sr-only">Search products</span>
+            <input id="productSearch" type="search" placeholder="Search products…" autocomplete="off" />
+          </label>
+        </div>
+        <p id="dashboardError" class="admin-error hidden" role="alert"></p>
+        <div class="table-scroll">
+          <table class="inventory-table">
+            <thead>
+              <tr><th scope="col">Product</th><th scope="col">Category</th><th scope="col">Price</th><th scope="col">Stock</th><th scope="col">Actions</th></tr>
+            </thead>
+            <tbody id="productRows"></tbody>
+          </table>
+        </div>
+        <p id="emptyInventory" class="empty-inventory hidden">No products match your search.</p>
+      </section>
+    </div>
+  </main>
+
+  <dialog id="productDialog" class="product-dialog" aria-labelledby="dialogTitle">
+    <form id="productForm" class="product-form">
+      <div class="dialog-heading">
+        <div><p class="eyebrow">Inventory</p><h2 id="dialogTitle">Add product</h2></div>
+        <button id="closeDialogButton" class="dialog-close" type="button" aria-label="Close dialog">×</button>
+      </div>
+      <input id="productId" type="hidden" />
+      <div class="form-grid">
+        <label class="form-field form-span-2">Product name
+          <input id="productName" name="name" type="text" maxlength="120" required autocomplete="off" />
+        </label>
+        <label class="form-field">Category
+          <input id="productCategory" name="category" type="text" maxlength="60" required list="categoryOptions" autocomplete="off" />
+          <datalist id="categoryOptions"></datalist>
+        </label>
+        <label class="form-field">Price (₹)
+          <input id="productPrice" name="price" type="number" min="0" max="100000000" step="0.01" required />
+        </label>
+        <div class="form-field form-span-2">
+          <span>Product images</span>
+          <div class="image-picker-actions">
+            <button id="addImagesButton" class="btn btn-secondary" type="button">+ Add Images</button>
+            <input id="imageFiles" type="file" accept="image/jpeg,image/png,image/gif,image/webp,image/avif" multiple hidden />
+          </div>
+          <div id="imageDropZone" class="image-drop-zone" role="button" tabindex="0" aria-label="Drop images here or select images">
+            Drop images here, or use “+ Add Images”
+          </div>
+          <div class="image-url-entry">
+            <input id="productImageUrl" type="url" maxlength="2048" placeholder="https://example.com/image.jpg" aria-label="Image URL" />
+            <button id="addImageUrlButton" class="btn btn-secondary" type="button">Add Image URL</button>
+          </div>
+          <div id="imagePreviews" class="image-previews" aria-live="polite"></div>
+        </div>
+        <label class="form-field">Stock quantity
+          <input id="productStock" name="stock" type="number" min="0" max="100000000" step="1" required />
+        </label>
+        <label class="form-field">Badge <span class="field-optional">(optional)</span>
+          <input id="productBadge" name="badge" type="text" maxlength="40" placeholder="e.g. Bestseller" />
+        </label>
+        <label class="form-field form-span-2">Description <span class="field-optional">(optional)</span>
+          <textarea id="productDescription" name="description" rows="4" maxlength="2000"></textarea>
+        </label>
+      </div>
+      <p id="formError" class="admin-error hidden" role="alert"></p>
+      <div class="form-actions">
+        <button id="cancelDialogButton" class="btn btn-secondary" type="button">Cancel</button>
+        <button id="saveProductButton" class="btn btn-primary" type="submit">Save product</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="../js/api.js"></script>
+  <script src="admin-products.js"></script>
+</body>
+</html>

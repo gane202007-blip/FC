@@ -1,16 +1,29 @@
-/* Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+:root{
+    --bg:#fff8f2;
+    --surface:#fff;
+    --text:#3f2b25;
+    --muted:#7e6761;
+    --primary:#d88b8f;
+    --primary-dark:#c77b86;
+    --border:rgba(155,126,97,.2);
+    --shadow:0 20px 50px rgba(78,49,35,.08);
+}
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+    font-family:'Inter',sans-serif;
 }
 
 body{
 
-    background:#fff7fb;
+    background:
+        radial-gradient(circle at top left,rgba(255,232,232,.8),transparent 25%),
+        linear-gradient(180deg,#fff8f2 0%,#fffefb 100%);
+    color:var(--text);
 
     min-height:100vh;
 
@@ -46,13 +59,13 @@ body{
 
     max-width:460px;
 
-    background:#fff;
+    background:var(--surface);
 
     border-radius:20px;
 
     padding:40px;
 
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    box-shadow:var(--shadow);
 
 }
 
@@ -76,7 +89,8 @@ body{
 
 .logo h2{
 
-    color:#222;
+    color:var(--text);
+    font-family:'Playfair Display',serif;
 
     font-size:28px;
 
@@ -86,7 +100,7 @@ body{
 
 .logo p{
 
-    color:#777;
+    color:var(--muted);
 
     font-size:15px;
 
@@ -112,7 +126,7 @@ body{
 
     transform:translateY(-50%);
 
-    color:#999;
+    color:var(--muted);
 
 }
 
@@ -122,7 +136,7 @@ body{
 
     padding:15px 50px;
 
-    border:1px solid #ddd;
+    border:1px solid var(--border);
 
     border-radius:12px;
 
@@ -134,11 +148,11 @@ body{
 
 .input-group input:focus{
 
-    border-color:#e91e63;
+    border-color:var(--primary);
 
     outline:none;
 
-    box-shadow:0 0 8px rgba(233,30,99,.2);
+    box-shadow:0 0 0 3px rgba(216,139,143,.16);
 
 }
 
@@ -162,7 +176,7 @@ body{
 
     cursor:pointer;
 
-    color:#777;
+    color:var(--muted);
 
 }
 
@@ -184,7 +198,7 @@ body{
 
 .options a{
 
-    color:#e91e63;
+    color:var(--primary-dark);
 
     text-decoration:none;
 
@@ -208,7 +222,7 @@ body{
 
     border-radius:12px;
 
-    background:#e91e63;
+    background:linear-gradient(135deg,var(--primary),var(--primary-dark));
 
     color:#fff;
 
@@ -224,7 +238,7 @@ body{
 
 .btn:hover{
 
-    background:#d81b60;
+    background:var(--primary-dark);
 
 }
 
@@ -249,7 +263,7 @@ body{
 
     height:1px;
 
-    background:#ddd;
+    background:var(--border);
 
 }
 
@@ -257,7 +271,7 @@ body{
 
     padding:0 15px;
 
-    color:#777;
+    color:var(--muted);
 
 }
 
@@ -273,7 +287,7 @@ body{
 
 .bottom-text a{
 
-    color:#e91e63;
+    color:var(--primary-dark);
 
     text-decoration:none;
 
@@ -303,11 +317,15 @@ body{
 
 .otp-input{
 
+    flex:1;
+
+    min-width:0;
+
     width:55px;
 
     height:60px;
 
-    border:1px solid #ddd;
+    border:1px solid var(--border);
 
     border-radius:12px;
 
@@ -323,7 +341,7 @@ body{
 
     outline:none;
 
-    border-color:#e91e63;
+    border-color:var(--primary);
 
 }
 
@@ -343,7 +361,7 @@ body{
 
     background:none;
 
-    color:#e91e63;
+    color:var(--primary-dark);
 
     font-weight:600;
 
@@ -355,7 +373,7 @@ body{
 
 .timer{
 
-    color:#666;
+    color:var(--muted);
 
     font-size:14px;
 
@@ -369,7 +387,7 @@ body{
 
     font-size:14px;
 
-    color:#666;
+    color:var(--muted);
 
 }
 
